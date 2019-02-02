@@ -1,0 +1,180 @@
+﻿@model Veb_portal_za_aukcijsku_prodaju.Models.Authentication.RegisterModel
+@{
+    Layout = null;
+    ViewBag.Title = "Registrujte se";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    @Styles.Render("~/Styles/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" type="text/css" />
+    <!-- Theme color -->
+    <link id="switcher" href="@Url.Content("~/Content/css/theme-color/lite-blue-theme.css")" rel="stylesheet">
+    <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <!-- Custom css build by Aleksa Lazarevic -->
+    <link href="@Url.Content("~/Content/css/custom.css")" rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+     
+</head>
+<body>
+    <!-- wpf loader Two -->
+    <div id="wpf-loader-two">
+        <div class="wpf-loader-two-inner">
+            <span>Loading</span>
+        </div>
+    </div>
+    <!-- / wpf loader Two -->
+    <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+    <!-- END SCROLL TOP BUTTON -->
+    <!-- Start header section -->
+    <header id="aa-header">
+        <!-- start header bottom  -->
+        <div class="aa-header-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-header-bottom-area">
+                            <!-- logo  -->
+                            <div class="aa-logo">
+                                <!-- Text based logo -->
+                                <a href='@Url.Action("Index", "Home")'>
+                                    <img src="@Url.Content("~/Content/img/logo.png")" class="img-responsive img-logo" alt="img_logo">
+                                    <p>kupi<strong>Jeftino</strong> <span>Portal za aukcijsku prodaju</span></p>
+                                </a>
+                                <!-- img based logo -->
+                                <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
+                            </div>
+                            <!-- / logo  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / header bottom  -->
+    </header>
+    <!-- / header section -->
+    <!-- catg header banner section -->
+    <section id="aa-catg-head-banner">
+        <img src="@Url.Content("~/Content/img/Pre-Retina-1.png")" class="img-cover" alt="fashion img">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>@ViewBag.Title</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="#">@Html.ActionLink("Početna", "Index", "Home")</a></li>
+                        <li class="active">Account</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / catg header banner section -->
+    <!-- Cart view section -->
+    <section id="aa-myaccount">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="aa-myaccount-area">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="aa-myaccount-register">
+                                    <h4>Registrujte se na portal</h4>
+                                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal aa-login-form", role = "form" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Ime, "Ime: *", new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(m => m.Ime, new { @class = "form-control" })
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.ValidationMessageFor(m => m.Ime)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Prezime, "Prezime: *", new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(m => m.Prezime, new { @class = "form-control" })
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.ValidationMessageFor(m => m.Prezime)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Email, "E-mail adresa: *", new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.ValidationMessageFor(m => m.Email)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Lozinka, "Lozinka: *", new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-8">
+                                                @Html.PasswordFor(m => m.Lozinka, new { @class = "form-control" })
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.ValidationMessageFor(m => m.Lozinka)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PotvrdaLozinke, "Potvrdite lozinku: *", new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-8">
+                                                @Html.PasswordFor(m => m.PotvrdaLozinke, new { @class = "form-control" })
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.ValidationMessageFor(m => m.PotvrdaLozinke)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" class="btn btn-default" value="Register" />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / Cart view section -->
+    @Html.Partial("_Footer")
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/otherjs")
+
+
+</body>
+</html>

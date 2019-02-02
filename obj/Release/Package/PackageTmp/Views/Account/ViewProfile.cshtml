@@ -1,0 +1,311 @@
+﻿@model Veb_portal_za_aukcijsku_prodaju.Models.Korisnik
+@{
+    ViewBag.Title = "Profil korisnika";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string numTokensID = Model.KorisnikID + "_tokens";
+
+    List<SelectListItem> items = new List<SelectListItem>();
+
+    items.Add(new SelectListItem { Text = "", Value = "0", Selected = true });
+
+    items.Add(new SelectListItem { Text = "SILVER", Value = "1" });
+
+    items.Add(new SelectListItem { Text = "GOLD", Value = "2" });
+
+    items.Add(new SelectListItem { Text = "PLATINUM", Value = "3" });    
+
+    ViewBag.Packs = items;
+}
+
+@if (Session["userID"] != null)
+{
+    <input type="hidden" id="userIDLabel" value="@Session["userID"]" />
+}  
+
+<h2>Profil korisnika</h2>
+
+<!-- product category -->
+<section id="aa-product-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-product-details-area">
+                    <div class="aa-product-details-content">
+                        <div class="row">                            
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="aa-product-view-content">
+                                    <h3>@Model.Ime @Model.Prezime</h3>
+                                    <div class="aa-price-block">
+                                        <p class="aa-product-avilability">Identifikacioni broj: <span>@Model.KorisnikID</span></p>
+                                        <p class="aa-product-avilability">
+                                            Ime: 
+                                            <span>@Model.Ime</span> 
+                                            <span class="glyphicon glyphicon-cog" id="changeFirstNameIcon"></span>
+                                            <span style="color: red;">@Html.ValidationSummary()</span>
+                                            <div class="aa-search-box hidden-form" id="hidden-form-firstname">
+                                                @using (Html.BeginForm("ChangeFirstName", "Account", FormMethod.Post))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.TextBox("newFirstName")
+                                                    <button type="submit" class="aa-add-to-cart-btn">Promenite ime</button>
+
+                                                }
+                                            </div>
+                                        </p>
+                                        <p class="aa-product-avilability">
+                                            Prezime: 
+                                            <span>@Model.Prezime</span> 
+                                            <span class="glyphicon glyphicon-cog" id="changeLastNameIcon"></span>
+                                            <span style="color: red;">@Html.ValidationSummary()</span>
+                                            <div class="aa-search-box hidden-form" id="hidden-form-lastname">
+                                                @using (Html.BeginForm("ChangeLastName", "Account", FormMethod.Post))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.TextBox("newLastName")
+                                                    <button type="submit" class="aa-add-to-cart-btn">Promenite prezime</button>
+
+                                                }
+                                            </div>
+                                        </p>
+                                        <p class="aa-product-avilability">
+                                            E-mail adresa: 
+                                            <span>@Model.Email</span> 
+                                            <span class="glyphicon glyphicon-cog" id="changeEmail"></span>
+                                            <span style="color: red;">@Html.ValidationSummary()</span>
+                                            <div class="aa-search-box hidden-form" id="hidden-form-email">
+                                                @using (Html.BeginForm("ChangeEmail", "Account", FormMethod.Post))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.TextBox("newEmail")
+                                                    <button type="submit" class="aa-add-to-cart-btn">Promenite e-mail</button>
+                                                    <span style="color: red;">@Html.ValidationSummary()</span>
+                                                }
+                                            </div>
+                                        </p>                                        
+                                    </div>
+                                    <h4>Broj tokena: </h4>
+                                    <div class="aa-prod-view-size" id="@numTokensID">@Model.BrojTokena</div>
+                                    <div class="aa-prod-view-bottom">                                        
+                                        <div class="aa-search-box" id="hidden-form-buy-tokens">
+                                            @using (Html.BeginForm("BuyTokens", "Account", FormMethod.Post))
+                                            {
+                                                @Html.AntiForgeryToken()                                                
+                                                <button type="submit" class="aa-add-to-cart-btn">Kupite tokene</button>
+                                                <span style="color: red;">@Html.ValidationSummary()</span>
+                                            }
+                                        </div>                                     
+                                        <a class="aa-add-to-cart-btn" id="changePassword" href="#">Promenite lozinku</a>                                             
+                                        @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
+                                        {
+                                            <span style="color: red;">@Html.ValidationSummary()</span>
+                                            <div class="aa-search-box hidden-form" id="hidden-form-password">
+                                                @Html.AntiForgeryToken()
+                                                @Html.Label("oldPassword", "Stara lozinka: ")
+                                                @Html.Password("oldPassword")
+                                                @Html.Label("oldPassword", "Nova lozinka: ")
+                                                @Html.Password("newPassword")
+                                                <button type="submit" class="aa-add-to-cart-btn">Promenite lozinku</button>                                                
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aa-product-details-bottom">
+                        <ul class="nav nav-tabs" id="myTab2">
+                            <li><a href="#description" data-toggle="tab">Dobijene aukcije</a></li>
+                            <li><a href="#review" data-toggle="tab">Narudzbine</a></li>
+                        </ul>
+                        
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="description">
+                                <ul class="aa-product-catg" style="text-align: center;">
+                                    @{
+                                        int countAuctions = 0;
+                                        using (var context = new Veb_portal_za_aukcijsku_prodaju.Models.IEPVebAukcijaEntities7())
+                                        {
+                                            var winAuctions = from user in context.Korisniks
+                                                              from auc in user.Aukcijas
+                                                              where user.KorisnikID == Model.KorisnikID
+                                                              select auc;
+
+                                            if (winAuctions != null)
+                                            {
+                                                if (winAuctions.Count() > 0)
+                                                {
+                                                    countAuctions = winAuctions.Count();
+                                                    winAuctions = winAuctions.Take(5);                                                    
+                                                    foreach (Veb_portal_za_aukcijsku_prodaju.Models.Aukcija item in winAuctions)
+                                                    {
+                                                        string lastBid = item.AukcijaID + "_lastBid";
+
+                                                        string currentPriceID = item.AukcijaID + "_lastPrice";
+                                                        string startPriceID = item.AukcijaID + "_startPrice";
+                                                        string statusID = item.AukcijaID + "_status";
+                                                        string timeID = item.AukcijaID + "_time";
+                                                        string bidBtnID = item.AukcijaID + "_btn";
+
+                                                        string badgeClass;
+
+                                                        switch (item.Status)
+                                                        {
+                                                            case ("OPEN"):
+                                                                badgeClass = "aa-badge aa-sale";
+                                                                break;
+                                                            case ("READY"):
+                                                                badgeClass = "aa-badge aa-hot";
+                                                                break;
+                                                            default:
+                                                                badgeClass = "aa-badge aa-sold-out";
+                                                                break;
+                                                        }
+
+                                                        <!-- start single product item -->
+                                                        <li>
+                                                            <figure>
+                                                                <a class="aa-product-img" href="@Url.Action("Index", "Auction", new { id = item.AukcijaID})">
+                                                                    @{
+                                                                        string imageSrc = "/Content/img/default.png";
+                                                                        if (item.Slika != null)
+                                                                        {
+                                                                            string imageBase64 = Convert.ToBase64String(item.Slika);
+                                                                            imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                                                                        }
+                                                                    }
+                                                                    <img src="@imageSrc" alt="slika_proizvoda" class="product-image" />
+                                                                </a>
+                                                                @{
+                                                                    string styleBidBtn;
+
+                                                                    if (item.Status == "OPEN")
+                                                                    {
+                                                                        styleBidBtn = "display: inline;";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        styleBidBtn = "display: none;";
+                                                                    }
+                                                                }
+
+                                                                @if (Session["userID"] != null)
+                                                                {
+                                                                    <div class="aa-add-card-btn bidBtn" href="#" data-value="@item.AukcijaID" id="@bidBtnID" style="@styleBidBtn">Bid</div>
+                                                                }
+                                                            </figure>
+                                                            <figcaption>
+                                                                <h4 class="aa-product-title"><a href="@Url.Action("Index", "Auction", new { id = item.AukcijaID})">@Html.DisplayFor(modelItem => item.Proizvod)</a></h4>
+                                                                <span class="aa-product-price" id="@currentPriceID">@Html.DisplayFor(modelItem => item.TrenutnaCena)</span><br />
+                                                                <span class="time-remaining" id="@timeID" data-value="@item.PreostaloVreme"></span>
+                                                            </figcaption>
+                                                            <div class="aa-product-hvr-content">
+                                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Poslednji bidovao" id="@lastBid">
+                                                                    @if (item.BidID != null)
+                                                                    {
+                                                                        <span>@item.Bid.Korisnik.Ime @item.Bid.Korisnik.Prezime</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span>Nema ponuda</span>
+                                                                    }
+                                                                </a>
+                                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Početna cena" id="@startPriceID">@Html.DisplayFor(modelItem => item.PocetnaCena)</a>
+                                                            </div>
+                                                            <!-- product badge -->
+                                                            <span class="@badgeClass" href="#" id="@statusID">@Html.DisplayFor(modelItem => item.Status)</span>
+                                                        </li>
+                                                    }
+                                                    if(countAuctions > 5)
+                                                    {
+                                                        <li style="width: 100%;">@Html.ActionLink("Videti sve dobijene aukcije", "AllAuctions", "Auction", new { id = Model.KorisnikID }, new { @class = "aa-add-to-cart-btn" })</li>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <li style="width: 100%;"><p><strong>Trenutno nemate nijednu dobijenu aukciju</strong></p></li>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li style="width: 100%;"><p><strong>Trenutno nemate nijednu dobijenu aukciju</strong></p></li>
+                                            }
+                                        }
+}
+                                </ul>
+
+                            </div>
+                            <div class="tab-pane fade " id="review">
+                                <table class="table table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Cena paketa</th>
+                                            <th>Broj tokena</th>
+                                            <th>Datum</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            int countOrders = 0;
+                                            using (var context = new Veb_portal_za_aukcijsku_prodaju.Models.IEPVebAukcijaEntities7())
+                                            {
+                                                var allOrders = context.Narudzbinas.Where(n => n.KorisnikID == Model.KorisnikID);
+                                                allOrders.OrderByDescending(n => n.DatumPravljenja);
+
+                                                if (allOrders != null)
+                                                {
+                                                    if (allOrders.Count() > 0)
+                                                    {
+                                                        countOrders = allOrders.Count();
+                                                        allOrders = allOrders.Take(5);
+                                                        foreach (Veb_portal_za_aukcijsku_prodaju.Models.Narudzbina item in allOrders)
+                                                        {                                                                                                                        
+                                                            <tr>                                                                    
+                                                                <td>
+                                                                    <a class="aa-product-img" href="@Url.Action("Index", "Order", new { id = item.NarudzbinaID})">
+                                                                        @item.NarudzbinaID
+                                                                    </a>
+                                                                </td>
+                                                                <td>&euro; @item.CenaTokena</td>
+                                                                <td>@item.BrojTokena</td>
+                                                                <td>@item.DatumPravljenja</td>
+                                                                <td>@item.Status</td>
+                                                            </tr>                                                            
+                                                        }
+                                                        if (countOrders > 5)
+                                                        {
+                                                            <tr>
+                                                                <td colspan="5" style="width: 100%;">@Html.ActionLink("Videti sve Vaše narudzbine", "AllOrders", "Order", new { id = Model.KorisnikID }, new { @class = "aa-add-to-cart-btn" })</td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td colspan="5" style="width: 100%;"><p><strong>Trenutno nemate nijednu dobijenu aukciju</strong></p></td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td colspan="5" style="width: 100%;"><p><strong>Trenutno nemate nijednu dobijenu aukciju</strong></p></td>
+                                                    </tr>
+                                                }
+                                            }
+}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / product category -->
+

@@ -1,0 +1,183 @@
+﻿@model Veb_portal_za_aukcijsku_prodaju.Models.Aukcija
+@{
+    ViewBag.Title = "Detalji o aukciji";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string currentPriceID = Model.AukcijaID + "_lastPrice";
+    string startPriceID = Model.AukcijaID + "_startPrice";
+    string statusID = Model.AukcijaID + "_status";
+    string tableID = Model.AukcijaID + "_table";
+    string timeID = Model.AukcijaID + "_time";
+    string bidBtnID = Model.AukcijaID + "_btn";
+    string adminWrapper = "admin-wrapper-" + Model.AukcijaID;
+    string userWrapper = "user-wrapper-" + Model.AukcijaID;        
+    var topBids = Model.Top10Bids;
+    bool logedinUser = false;
+    bool cond = true;
+    if (Session["admin"] != null)
+    {
+        if ((bool)Session["admin"])
+        {
+            cond = false;
+        }
+    }
+
+    if (Session["userID"] != null)
+    {
+        logedinUser = true;
+    }
+
+    string lastUser = "";
+    if ((Model.BidID != null) && (Model.BidID != 0))
+    {
+        using (var context = new Veb_portal_za_aukcijsku_prodaju.Models.IEPVebAukcijaEntities7())
+        {
+            Veb_portal_za_aukcijsku_prodaju.Models.Bid bid = context.Bids.Find(Model.BidID);
+            if (bid != null)
+            {
+                Veb_portal_za_aukcijsku_prodaju.Models.Korisnik korisnik = context.Korisniks.Find(bid.KorisnikID);
+                if (korisnik != null)
+                {
+                    lastUser = korisnik.Ime + " " + korisnik.Prezime;
+                }
+            }
+        }
+    }
+
+    string styleUser = "display: inline;";
+    string styleAdmin = "display: none;";
+    if (cond && logedinUser && ((@Model.Status == "OPEN")))
+    {
+        styleUser = "display: inline;";        
+    }else
+    {
+        styleUser = "display: none;";
+        if ((Model.Status == "READY") && (!cond))
+        {
+            styleAdmin = "display: inline;";
+        }
+    }
+ 
+}
+
+@if (Session["userID"] != null)
+{
+    <input type="hidden" id="userIDLabel" value="@Session["userID"]" />
+}
+
+<h2>Detalji o aukciji</h2>
+
+<!-- product category -->
+<section id="aa-product-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-product-details-area">
+                    <div class="aa-product-details-content">
+                        <div class="row">
+                            <!-- Modal view slider -->
+                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                <div class="aa-product-view-slider">
+                                    <div id="demo-1" class="simpleLens-gallery-container">
+                                        <div class="simpleLens-container">
+                                            <div class="simpleLens-big-image-container">                                                
+                                                @{
+                                                    string imageSrc = "/Content/img/default.png";
+                                                    if (Model.Slika != null)
+                                                    {
+                                                        string imageBase64 = Convert.ToBase64String(Model.Slika);
+                                                        imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                                                    }
+                                                }
+                                                <a data-lens-image="@imageSrc" class="simpleLens-lens-image">
+                                                    <img src="@imageSrc" alt="slika_proizvoda" class="simpleLens-big-image" />
+                                                </a>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal view content -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <div class="aa-product-view-content">
+                                    <h3>@Model.Proizvod</h3>
+                                    <div class="aa-price-block">
+                                        <p class="aa-product-avilability">Trenutna cena: &euro; <span id="@currentPriceID">@Model.TrenutnaCena</span></p>
+                                        <p class="aa-product-avilability">Početna cena: &euro; <span id="@startPriceID">@Model.PocetnaCena</span></p>
+                                        <p class="aa-product-avilability">Status: <span id="@statusID">@Model.Status</span></p>
+                                        <p class="aa-product-avilability">Vreme kreiranja aukcije: <span>@Model.VremeKreiranja</span></p>
+                                        <p class="aa-product-avilability">Vreme otvaranja aukcije: <span>@Model.VremeOtvaranja</span></p>
+                                        <p class="aa-product-avilability">Vreme zatvaranja aukcije: <span>@Model.VremeZatvaranja</span></p>
+                                    </div>                                    
+                                    <h4>Preostalo vreme:</h4>
+                                    <div class="aa-prod-view-size"><span class="time-remaining" id="@timeID" data-value="@Model.PreostaloVreme"></span></div>
+                                    @if (!lastUser.Equals(""))
+                                    {
+                                        <h4>Poslednji koji je dao ponudu:</h4>
+                                        <div class="aa-color-tag">@lastUser</div>
+                                    }                                    
+                                    <div class="aa-prod-view-bottom">
+                                        @if (cond)
+                                        {
+                                            <div id="@userWrapper" style="@styleUser">
+                                                <a class="aa-add-cart-btn bidBtn" data-value="@Model.AukcijaID" id="@bidBtnID" href="#">Bid</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div id="@adminWrapper" style="@styleAdmin">
+                                                <button class="aa-add-to-cart-btn" data-value="@Model.AukcijaID" id="activateAuction">Aktiviraj</button>
+                                                @Html.ActionLink("Obriši aukciju", "Delete", "Auction", new { id = Model.AukcijaID }, new { @class = "aa-add-to-cart-btn" })
+                                                <div class="aa-search-box">
+                                                    <input type="text" id="newStartPriceLabel" />
+                                                    <button type="submit" class="aa-add-to-cart-btn" data-value="@Model.AukcijaID" id="changePriceBtn">Promeni početnu cenu</button>
+                                                </div>
+                                            </div>
+                                        }                                                                                                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Related product -->
+                    <div class="aa-product-related-item">
+                        <div class="row">
+                            <div class="col-ms-12">
+                                <h3>Poslednjih 10 ponuda</h3>
+                                <div class="checkout-right">                                    
+                                    <div class="aa-order-summary-area">
+                                        <table class="table table-responsive" id="@tableID">
+                                            <thead>
+                                                <tr>
+                                                    <th>Korisnik</th>
+                                                    <th>Ponuda</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var bid in topBids)
+                                                {
+                                                    <tr>
+                                                        <td><strong> @bid.KorisnikImePrezime</strong></td>
+                                                        <td>&euro; @bid.PonCena</td>
+                                                    </tr>                                                                                                  
+                                                }                                                                                                                                                   
+                                            </tbody>                                            
+                                        </table>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / product category -->
+
+@section scripts {
+    <!--Script references. -->
+    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+    <!--Reference the SignalR library. -->    
+}

@@ -1,0 +1,78 @@
+﻿@model Veb_portal_za_aukcijsku_prodaju.Models.Authentication.NewAuctionModel
+@{
+    ViewBag.Title = "Nova aukcija";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["userID"] != null)
+{
+    <input type="hidden" id="userIDLabel" value="@Session["userID"]" />
+}   
+
+<!-- Cart view section -->
+<section id="aa-myaccount">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-myaccount-area">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="aa-myaccount-register">
+                                <h4>Dodajte aukciju</h4>
+                                @using (Html.BeginForm("AddAuction", "Admin", FormMethod.Post, new { enctype =   "multipart/form-data",  @class = "form-horizontal aa-login-form"}))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Proizvod, "Ime proizvoda: *", new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.Proizvod, new { @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.ValidationMessageFor(m => m.Proizvod)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Trajanje, "Trajanje u sekundama: *", new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.Trajanje, new { @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.ValidationMessageFor(m => m.Trajanje)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PocetnaCena, "Početna cena proizvoda: *", new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.PocetnaCena, new { @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.ValidationMessageFor(m => m.PocetnaCena)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Slika, "Slika proizvoda: ", new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(model => model.Slika, new { type = "file" })
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.ValidationMessageFor(m => m.Slika)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" class="btn btn-default" value="Dodajte aukciju" />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Cart view section -->
+
+
+

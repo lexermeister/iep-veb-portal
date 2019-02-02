@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AukcijaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Aukcija">
+    <Key>
+      <PropertyRef Name="AukcijaID" />
+    </Key>
+    <Property Name="AukcijaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Proizvod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Trajanje" Type="Int32" />
+    <Property Name="PocetnaCena" Type="Double" />
+    <Property Name="VremeKreiranja" Type="DateTime" Precision="3" />
+    <Property Name="VremeOtvaranja" Type="DateTime" Precision="3" />
+    <Property Name="VremeZatvaranja" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TrenutnaCena" Type="Double" />
+    <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="BidID" Type="Int32" />
+    <NavigationProperty Name="Bids" Relationship="Self.R_3" FromRole="Aukcija" ToRole="Bid" />
+    <NavigationProperty Name="Bid" Relationship="Self.R_4" FromRole="Aukcija" ToRole="Bid" />
+    <NavigationProperty Name="Korisniks" Relationship="Self.Dobio" FromRole="Aukcija" ToRole="Korisnik" />
+  </EntityType>
+  <EntityType Name="Bid">
+    <Key>
+      <PropertyRef Name="BidID" />
+    </Key>
+    <Property Name="BidID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PonCena" Type="Double" />
+    <Property Name="Vreme" Type="DateTime" Precision="3" />
+    <Property Name="KorisnikID" Type="Int32" Nullable="false" />
+    <Property Name="AukcijaID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Aukcija" Relationship="Self.R_3" FromRole="Bid" ToRole="Aukcija" />
+    <NavigationProperty Name="Aukcijas" Relationship="Self.R_4" FromRole="Bid" ToRole="Aukcija" />
+    <NavigationProperty Name="Korisnik" Relationship="Self.R_2" FromRole="Bid" ToRole="Korisnik" />
+  </EntityType>
+  <EntityType Name="Korisnik">
+    <Key>
+      <PropertyRef Name="KorisnikID" />
+    </Key>
+    <Property Name="KorisnikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lozinka" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BrojTokena" Type="Int32" />
+    <Property Name="Admin" Type="Boolean" />
+    <NavigationProperty Name="Bids" Relationship="Self.R_2" FromRole="Korisnik" ToRole="Bid" />
+    <NavigationProperty Name="Narudzbinas" Relationship="Self.R_1" FromRole="Korisnik" ToRole="Narudzbina" />
+    <NavigationProperty Name="Aukcijas" Relationship="Self.Dobio" FromRole="Korisnik" ToRole="Aukcija" />
+  </EntityType>
+  <EntityType Name="Narudzbina">
+    <Key>
+      <PropertyRef Name="NarudzbinaID" />
+    </Key>
+    <Property Name="NarudzbinaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CenaPaketa" Type="Double" />
+    <Property Name="BrojTokena" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DatumPravljenja" Type="DateTime" Precision="3" />
+    <Property Name="KorisnikID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Korisnik" Relationship="Self.R_1" FromRole="Narudzbina" ToRole="Korisnik" />
+  </EntityType>
+  <Association Name="R_3">
+    <End Role="Aukcija" Type="Self.Aukcija" Multiplicity="1" />
+    <End Role="Bid" Type="Self.Bid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aukcija">
+        <PropertyRef Name="AukcijaID" />
+      </Principal>
+      <Dependent Role="Bid">
+        <PropertyRef Name="AukcijaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_4">
+    <End Role="Bid" Type="Self.Bid" Multiplicity="0..1" />
+    <End Role="Aukcija" Type="Self.Aukcija" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bid">
+        <PropertyRef Name="BidID" />
+      </Principal>
+      <Dependent Role="Aukcija">
+        <PropertyRef Name="BidID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_2">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+    <End Role="Bid" Type="Self.Bid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="Bid">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_1">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="1" />
+    <End Role="Narudzbina" Type="Self.Narudzbina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="Narudzbina">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Dobio">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+    <End Role="Aukcija" Type="Self.Aukcija" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="AukcijaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Aukcijas" EntityType="Self.Aukcija" />
+    <EntitySet Name="Bids" EntityType="Self.Bid" />
+    <EntitySet Name="Korisniks" EntityType="Self.Korisnik" />
+    <EntitySet Name="Narudzbinas" EntityType="Self.Narudzbina" />
+    <AssociationSet Name="R_3" Association="Self.R_3">
+      <End Role="Aukcija" EntitySet="Aukcijas" />
+      <End Role="Bid" EntitySet="Bids" />
+    </AssociationSet>
+    <AssociationSet Name="R_4" Association="Self.R_4">
+      <End Role="Bid" EntitySet="Bids" />
+      <End Role="Aukcija" EntitySet="Aukcijas" />
+    </AssociationSet>
+    <AssociationSet Name="R_2" Association="Self.R_2">
+      <End Role="Korisnik" EntitySet="Korisniks" />
+      <End Role="Bid" EntitySet="Bids" />
+    </AssociationSet>
+    <AssociationSet Name="R_1" Association="Self.R_1">
+      <End Role="Korisnik" EntitySet="Korisniks" />
+      <End Role="Narudzbina" EntitySet="Narudzbinas" />
+    </AssociationSet>
+    <AssociationSet Name="Dobio" Association="Self.Dobio">
+      <End Role="Korisnik" EntitySet="Korisniks" />
+      <End Role="Aukcija" EntitySet="Aukcijas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

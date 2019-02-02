@@ -1,0 +1,51 @@
+﻿@model Veb_portal_za_aukcijsku_prodaju.Models.Narudzbina
+
+@{
+    ViewBag.Title = "Detalji o porudzbini";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string paket = "";
+
+    if ((double)Model.CenaTokena == 3.0) { paket = "SILVER"; }
+    if ((double)Model.CenaTokena == 5.0) { paket = "GOLD"; }
+    if ((double)Model.CenaTokena == 10.0) { paket = "PLATINUM"; }
+}
+
+@if (Session["userID"] != null)
+{
+    <input type="hidden" id="userIDLabel" value="@Session["userID"]" />
+}  
+
+<h2>@ViewBag.Title</h2>
+
+<!-- product category -->
+<section id="aa-product-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-product-details-area">
+                    <div class="aa-product-details-content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="aa-product-view-content">
+                                    <h3>@ViewBag.Title</h3>
+                                    <div class="aa-price-block">
+                                        <p class="aa-product-avilability">Identifikacioni broj: <span>@Model.NarudzbinaID</span></p>
+                                        <p class="aa-product-avilability">Naziv paketa: <span>@paket</span></p>
+                                        <p class="aa-product-avilability">Cena paketa: <span>@Model.CenaTokena</span></p>
+                                        <p class="aa-product-avilability">Datum pravljenja porudzbine: <span>@Model.DatumPravljenja</span></p>
+                                    </div>
+                                    <h4>Broj tokena: </h4>
+                                    <div class="aa-prod-view-size">@Model.BrojTokena</div>
+                                    <h4>Status: </h4>
+                                    <div class="aa-prod-view-size">@Model.Status</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / product category -->

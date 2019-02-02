@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<Veb_portal_za_aukcijsku_prodaju.Models.Narudzbina>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Porudzbine";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["userID"] != null)
+{
+    <input type="hidden" id="userIDLabel" value="@Session["userID"]" />
+}  
+
+<h2>@ViewBag.Title</h2>
+
+<!-- Products section -->
+<section id="aa-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="aa-product-area">
+                        <div class="aa-product-inner">
+                            <!-- start page numbering -->
+                            <div class="page-numbering">
+                                @Html.PagedListPager(Model, page => Url.Action("AllOrders", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                            </div>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <!-- Start all products -->
+                                <div class="tab-pane fade in active" id="men">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Cena paketa</th>
+                                                <th>Broj tokena</th>
+                                                <th>Datum</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a class="aa-product-img" href="@Url.Action("Index", "Order", new { id = item.NarudzbinaID})">
+                                                            @item.NarudzbinaID
+                                                         </a>
+                                                         </td>
+                                                         <td>&euro; @item.CenaTokena</td>
+                                                         <td>@item.BrojTokena</td>
+                                                         <td>@item.DatumPravljenja</td>
+                                                         <td>@item.Status</td>
+                                                     </tr>
+                                             }                                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- / all products -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Products section -->

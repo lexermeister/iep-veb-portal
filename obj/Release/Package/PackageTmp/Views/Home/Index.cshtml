@@ -1,0 +1,140 @@
+﻿@model PagedList.IPagedList<Veb_portal_za_aukcijsku_prodaju.Models.Aukcija>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Početna";
+}
+
+@if (Session["userID"] != null)
+{
+    <input type="hidden" id="userIDLabel" value="@Session["userID"]" />    
+}
+
+<!-- Products section -->
+<section id="aa-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="aa-product-area">
+                        <div class="aa-product-inner">
+                            <!-- start page numbering -->
+                            <div class="page-numbering">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.sortOrder }))                                
+                            </div>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <!-- Start all products -->
+                                <div class="tab-pane fade in active" id="men">
+                                    <ul class="aa-product-catg">
+                                        @{
+                                            if(Model.Count > 0)
+                                            {
+                                                foreach (var item in Model)
+                                                {
+                                                    string lastBid = item.AukcijaID + "_lastBid";
+
+                                                    string currentPriceID = item.AukcijaID + "_lastPrice";
+                                                    string startPriceID = item.AukcijaID + "_startPrice";
+                                                    string statusID = item.AukcijaID + "_status";
+                                                    string timeID = item.AukcijaID + "_time";
+                                                    string bidBtnID = item.AukcijaID + "_btn";
+
+                                                    string badgeClass;
+                                                    
+                                                    switch(item.Status)
+                                                    {
+                                                        case("OPEN"):
+                                                            badgeClass = "aa-badge aa-sale";
+                                                            break;
+                                                        case("READY"):
+                                                            badgeClass = "aa-badge aa-hot";
+                                                            break;
+                                                        default:
+                                                            badgeClass = "aa-badge aa-sold-out";
+                                                            break;
+                                                    }
+
+                                            <!-- start single product item -->
+                                                    <li>
+                                                        <figure>
+                                                            <a class="aa-product-img" href="@Url.Action("Index", "Auction", new { id = item.AukcijaID})">
+                                                                @{
+                                                    string imageSrc = "/Content/img/default.png";
+                                                    if (item.Slika != null)
+                                                    {
+                                                        string imageBase64 = Convert.ToBase64String(item.Slika);
+                                                        imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                                                    }
+                                                                }
+                                                                <img src="@imageSrc" alt="slika_proizvoda" class="product-image" />
+                                                            </a>
+                                                            @{
+                                                    string styleBidBtn;
+
+                                                    if (item.Status == "OPEN")
+                                                    {
+                                                        styleBidBtn = "display: inline;";
+                                                    }
+                                                    else
+                                                    {
+                                                        styleBidBtn = "display: none;";
+                                                    }
+                                                            }
+
+                                                            @if (Session["userID"] != null)
+                                                            {
+                                                                <div class="aa-add-card-btn bidBtn" href="#" data-value="@item.AukcijaID" id="@bidBtnID" style="@styleBidBtn">Bid</div>
+                                                            }
+                                                        </figure>
+                                                        <figcaption>
+                                                            <h4 class="aa-product-title"><a href="@Url.Action("Index", "Auction", new { id = item.AukcijaID})">@Html.DisplayFor(modelItem => item.Proizvod)</a></h4>
+                                                            <span class="aa-product-price">&euro; <span id="@currentPriceID">@Html.DisplayFor(modelItem => item.TrenutnaCena)</span></span><br />
+                                                            <span class="time-remaining" id="@timeID" data-value="@item.PreostaloVreme"></span>
+                                                        </figcaption>
+                                                        <div class="aa-product-hvr-content">
+                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Poslednji bidovao" id="@lastBid">
+                                                                @if (item.BidID != null)
+                                                                {
+                                                                    <span>@item.Bid.Korisnik.Ime @item.Bid.Korisnik.Prezime</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span>Nema ponuda</span>
+                                                                }
+                                                            </a>
+                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Početna cena" id="@startPriceID">&euro; @Html.DisplayFor(modelItem => item.PocetnaCena)</a>
+                                                        </div>
+                                                        <!-- product badge -->
+                                                        <span class="@badgeClass" href="#" id="@statusID">@Html.DisplayFor(modelItem => item.Status)</span>
+                                                    </li>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li style="width: 100%;"><p><strong>Trenutno nema aktivnih aukcija</strong></p></li>
+                                            }
+}                                        
+                                    </ul>
+                                </div>
+                                <!-- / all products -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Products section -->
+@section scripts {
+    <!--Script references. -->
+    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+    <!--Reference the SignalR library. -->
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+
+    <script src="~/Scripts/signalr-actions.js"></script>
+    <!--SignalR script to update the chat page and send messages.-->
+}

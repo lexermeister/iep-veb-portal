@@ -1,0 +1,90 @@
+﻿/*
+    Created by Aleksa Lazarevic.
+
+*/
+
+.img-logo {   
+    max-width: 60px;
+    max-height: 60px;
+    float: left;
+}
+
+.img-cover {
+    margin: 0 auto;
+    display: block;
+}
+/*
+ {   
+	width:100%;	
+	position:absolute;
+	bottom:0;
+	left:0;
+    margin-top:20px;
+}
+
+    */
+.field-validation-error {
+    color: red;
+}
+
+#aa-footer {    
+    width: 100%; // Don't change
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    position: fixed;
+    bottom: 0pt;
+    left: 0pt;
+    margin-top:20px;
+}   
+.aa-footer-bottom {    
+    width: 1000px; // Visible width of footer
+    margin:auto;
+
+}
+.product-image {
+    max-width: 196px;
+    max-height: 218px;
+}
+
+figure {
+    //background: #eee;
+    border: 1px solid #ddd;
+}
+
+.page-numbering {
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+.glyphicon-cog {
+    margin-left: 20px;
+    cursor: pointer;    
+}
+
+.hidden-form {
+    display: none;    
+}
+
+.search-fields {
+    float: left;
+}
+
+.search-all {
+    margin-right: 10px;
+}
+
+.aa-add-card-btn {
+    cursor: pointer;
+}
+
+.filter-col{
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.search-fields{
+    float: left;
+}

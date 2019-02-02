@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IEPVebAukcijaModelStoreContainer" CdmEntityContainer="IEPVebAukcijaEntities5">
+    <EntitySetMapping Name="Aukcijas">
+      <EntityTypeMapping TypeName="IEPVebAukcijaModel.Aukcija">
+        <MappingFragment StoreEntitySet="Aukcija">
+          <ScalarProperty Name="AukcijaID" ColumnName="AukcijaID" />
+          <ScalarProperty Name="Proizvod" ColumnName="Proizvod" />
+          <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+          <ScalarProperty Name="PocetnaCena" ColumnName="PocetnaCena" />
+          <ScalarProperty Name="VremeKreiranja" ColumnName="VremeKreiranja" />
+          <ScalarProperty Name="VremeOtvaranja" ColumnName="VremeOtvaranja" />
+          <ScalarProperty Name="VremeZatvaranja" ColumnName="VremeZatvaranja" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="TrenutnaCena" ColumnName="TrenutnaCena" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+          <ScalarProperty Name="BidID" ColumnName="BidID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bids">
+      <EntityTypeMapping TypeName="IEPVebAukcijaModel.Bid">
+        <MappingFragment StoreEntitySet="Bid">
+          <ScalarProperty Name="BidID" ColumnName="BidID" />
+          <ScalarProperty Name="PonCena" ColumnName="PonCena" />
+          <ScalarProperty Name="AukcijaID" ColumnName="AukcijaID" />
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+          <ScalarProperty Name="VremeSlanja" ColumnName="VremeSlanja" />
+          <ScalarProperty Name="BrojTokena" ColumnName="BrojTokena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Korisniks">
+      <EntityTypeMapping TypeName="IEPVebAukcijaModel.Korisnik">
+        <MappingFragment StoreEntitySet="Korisnik">
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="BrojTokena" ColumnName="BrojTokena" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Narudzbinas">
+      <EntityTypeMapping TypeName="IEPVebAukcijaModel.Narudzbina">
+        <MappingFragment StoreEntitySet="Narudzbina">
+          <ScalarProperty Name="NarudzbinaID" ColumnName="NarudzbinaID" />
+          <ScalarProperty Name="CenaTokena" ColumnName="CenaTokena" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="BrojTokena" ColumnName="BrojTokena" />
+          <ScalarProperty Name="DatumPravljenja" ColumnName="DatumPravljenja" />
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

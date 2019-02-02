@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IEPVebAukcijaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Aukcija">
+    <Key>
+      <PropertyRef Name="AukcijaID" />
+    </Key>
+    <Property Name="AukcijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Proizvod" Type="varchar" MaxLength="20" />
+    <Property Name="Trajanje" Type="int" />
+    <Property Name="PocetnaCena" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="VremeKreiranja" Type="datetime" />
+    <Property Name="VremeOtvaranja" Type="datetime" />
+    <Property Name="VremeZatvaranja" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+    <Property Name="TrenutnaCena" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Slika" Type="image" />
+    <Property Name="KorisnikID" Type="int" />
+    <Property Name="BidID" Type="int" />
+  </EntityType>
+  <EntityType Name="Bid">
+    <Key>
+      <PropertyRef Name="BidID" />
+    </Key>
+    <Property Name="BidID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PonCena" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="AukcijaID" Type="int" />
+    <Property Name="KorisnikID" Type="int" />
+    <Property Name="VremeSlanja" Type="datetime" />
+    <Property Name="BrojTokena" Type="int" />
+  </EntityType>
+  <EntityType Name="Korisnik">
+    <Key>
+      <PropertyRef Name="KorisnikID" />
+    </Key>
+    <Property Name="KorisnikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="varchar" MaxLength="20" />
+    <Property Name="Prezime" Type="varchar" MaxLength="20" />
+    <Property Name="Lozinka" Type="varchar" MaxLength="60" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="BrojTokena" Type="int" />
+    <Property Name="Admin" Type="bit" />
+  </EntityType>
+  <EntityType Name="Narudzbina">
+    <Key>
+      <PropertyRef Name="NarudzbinaID" />
+    </Key>
+    <Property Name="NarudzbinaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CenaTokena" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+    <Property Name="BrojTokena" Type="int" />
+    <Property Name="DatumPravljenja" Type="datetime" />
+    <Property Name="KorisnikID" Type="int" />
+  </EntityType>
+  <Association Name="R_1">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+    <End Role="Narudzbina" Type="Self.Narudzbina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="Narudzbina">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_2">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+    <End Role="Aukcija" Type="Self.Aukcija" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="Aukcija">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_3">
+    <End Role="Aukcija" Type="Self.Aukcija" Multiplicity="0..1" />
+    <End Role="Bid" Type="Self.Bid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aukcija">
+        <PropertyRef Name="AukcijaID" />
+      </Principal>
+      <Dependent Role="Bid">
+        <PropertyRef Name="AukcijaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_4">
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+    <End Role="Bid" Type="Self.Bid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnik">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="Bid">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_6">
+    <End Role="Bid" Type="Self.Bid" Multiplicity="0..1" />
+    <End Role="Aukcija" Type="Self.Aukcija" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bid">
+        <PropertyRef Name="BidID" />
+      </Principal>
+      <Dependent Role="Aukcija">
+        <PropertyRef Name="BidID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IEPVebAukcijaModelStoreContainer">
+    <EntitySet Name="Aukcija" EntityType="Self.Aukcija" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bid" EntityType="Self.Bid" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Narudzbina" EntityType="Self.Narudzbina" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="R_1" Association="Self.R_1">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="Narudzbina" EntitySet="Narudzbina" />
+    </AssociationSet>
+    <AssociationSet Name="R_2" Association="Self.R_2">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="Aukcija" EntitySet="Aukcija" />
+    </AssociationSet>
+    <AssociationSet Name="R_3" Association="Self.R_3">
+      <End Role="Aukcija" EntitySet="Aukcija" />
+      <End Role="Bid" EntitySet="Bid" />
+    </AssociationSet>
+    <AssociationSet Name="R_4" Association="Self.R_4">
+      <End Role="Korisnik" EntitySet="Korisnik" />
+      <End Role="Bid" EntitySet="Bid" />
+    </AssociationSet>
+    <AssociationSet Name="R_6" Association="Self.R_6">
+      <End Role="Bid" EntitySet="Bid" />
+      <End Role="Aukcija" EntitySet="Aukcija" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

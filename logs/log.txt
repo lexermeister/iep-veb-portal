@@ -1,0 +1,85 @@
+ERROR 2016-07-14 02:37:06,283 48453ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 1, AuctionStatus: OPEN
+ERROR 2016-07-14 02:37:37,963 80133ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 99
+ERROR 2016-07-14 02:38:01,553 103723ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 99
+ERROR 2018-12-18 23:59:59,366 195717ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 0, AuctionName: Pegla, AuctionStatus: READY
+ERROR 2018-12-19 00:02:39,273 355624ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 0, AuctionStatus: OPEN
+ERROR 2019-01-22 00:47:38,094 345590ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 1, AuctionName: Televizor, AuctionStatus: READY
+ERROR 2019-01-22 00:48:07,447 374944ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 1, AuctionStatus: OPEN
+ERROR 2019-01-22 00:49:09,923 437419ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 5.00, UserBidedID: 1
+ERROR 2019-01-22 00:49:11,579 439075ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 5.00, UserBidedID: 1
+ERROR 2019-01-22 00:49:18,166 445662ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 5.00, UserBidedID: 1
+ERROR 2019-01-22 00:50:08,568 496064ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 5.00, UserBidedID: 1
+ERROR 2019-01-22 00:50:14,480 501977ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 5.00, UserBidedID: 1
+ERROR 2019-01-22 00:50:15,156 502652ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 5.00, UserBidedID: 1
+ERROR 2019-01-22 00:50:15,377 502874ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 5.00, UserBidedID: 1
+ERROR 2019-01-22 00:50:15,559 503056ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 5.00, UserBidedID: 1
+ERROR 2019-01-22 00:50:16,774 504270ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 5.00, UserBidedID: 1
+ERROR 2019-01-22 00:53:31,337 105980ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 2, AuctionName: Pegla, AuctionStatus: READY
+ERROR 2019-01-22 00:53:44,528 119172ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 2, AuctionStatus: OPEN
+ERROR 2019-01-22 00:54:05,069 139713ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 2, AuctionCurrentPrice: 15.00, UserBidedID: 1
+ERROR 2019-01-22 00:54:53,396 188040ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 2, AuctionCurrentPrice: 15.00, UserBidedID: 2
+ERROR 2019-01-22 00:55:21,480 216124ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 2, AuctionCurrentPrice: 15.00, UserBidedID: 1
+ERROR 2019-01-26 21:19:06,975 1650390ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 3, AuctionName: Kompjuter, AuctionStatus: READY
+ERROR 2019-01-26 21:19:54,556 1697971ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 4, AuctionName: Proizvod1, AuctionStatus: READY
+ERROR 2019-01-26 21:20:16,226 1719642ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 5, AuctionName: Prozivod2, AuctionStatus: READY
+ERROR 2019-01-26 21:20:32,853 1736268ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 6, AuctionName: Proizvod3, AuctionStatus: READY
+ERROR 2019-01-26 21:21:02,487 1765902ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 7, AuctionName: Proizvod4, AuctionStatus: READY
+ERROR 2019-01-26 21:21:19,471 1782887ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 8, AuctionName: Proizvod5, AuctionStatus: READY
+ERROR 2019-01-26 21:21:34,963 1798379ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 9, AuctionName: Proizvod6, AuctionStatus: READY
+ERROR 2019-01-26 21:21:48,103 1811518ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 10, AuctionName: Proizvod7, AuctionStatus: READY
+ERROR 2019-01-26 21:22:23,529 1846944ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 11, AuctionName: Knjiga, AuctionStatus: READY
+ERROR 2019-01-26 21:23:35,340 1918756ms HelpMethods            ChangePrice        - AUCTION PRICE CHANGE: AuctionID: 11, AuctionStatus: READY, AuctionStartPrice: 6
+ERROR 2019-01-26 21:23:53,793 1937209ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 8, AuctionStatus: OPEN
+ERROR 2019-01-26 21:24:08,311 1951726ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 10, AuctionStatus: OPEN
+ERROR 2019-01-26 21:24:20,155 1963570ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 5, AuctionStatus: OPEN
+ERROR 2019-01-26 21:25:07,679 2011094ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 8, AuctionCurrentPrice: 10.00, UserBidedID: 1
+ERROR 2019-01-26 21:25:14,014 2017429ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 8, AuctionCurrentPrice: 10.00, UserBidedID: 1
+ERROR 2019-01-26 21:26:56,518 2119934ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 8, AuctionCurrentPrice: 10.00, UserBidedID: 2
+ERROR 2019-01-26 23:16:39,537 62152ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 9, AuctionStatus: OPEN
+ERROR 2019-01-26 23:16:52,708 75323ms HelpMethods            ChangePrice        - AUCTION PRICE CHANGE: AuctionID: 9, AuctionStatus: OPEN, AuctionStartPrice: 12.5
+ERROR 2019-01-26 23:16:52,798 75413ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 9, AuctionCurrentPrice: 12.00, UserBidedID: 1
+ERROR 2019-01-26 23:18:56,978 48848ms HelpMethods            ChangePrice        - AUCTION PRICE CHANGE: AuctionID: 9, AuctionStatus: OPEN, AuctionStartPrice: 1000
+ERROR 2019-01-26 23:18:57,055 48925ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 9, AuctionCurrentPrice: 12.00, UserBidedID: 1
+ERROR 2019-01-26 23:21:48,149 103885ms HelpMethods            ChangePrice        - AUCTION PRICE CHANGE: AuctionID: 9, AuctionStatus: OPEN, AuctionStartPrice: 1000
+ERROR 2019-01-26 23:21:57,134 112870ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 9, AuctionCurrentPrice: 12.00, UserBidedID: 1
+ERROR 2019-01-26 23:22:37,395 153130ms HelpMethods            ChangePrice        - AUCTION PRICE CHANGE: AuctionID: 9, AuctionStatus: OPEN, AuctionStartPrice: 1000
+ERROR 2019-01-26 23:22:42,374 158109ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 9, AuctionCurrentPrice: 12.00, UserBidedID: 1
+ERROR 2019-01-26 23:23:26,593 202328ms HelpMethods            ChangePrice        - AUCTION PRICE CHANGE: AuctionID: 9, AuctionStatus: OPEN, AuctionStartPrice: 1000
+ERROR 2019-01-26 23:23:29,783 205518ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 9, AuctionCurrentPrice: 12.00, UserBidedID: 1
+ERROR 2019-01-26 23:24:20,112 255847ms HelpMethods            ChangePrice        - AUCTION PRICE CHANGE: AuctionID: 9, AuctionStatus: OPEN, AuctionStartPrice: 1000
+ERROR 2019-01-26 23:24:23,246 258981ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 9, AuctionCurrentPrice: 12.00, UserBidedID: 1
+ERROR 2019-01-30 23:54:33,048 110330ms AuctionController      Delete             - DELETE AUCTION: AuctionID: 4, AuctionStatus: DRAFT
+ERROR 2019-02-01 00:55:24,359 58264ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 6, AuctionStatus: OPEN
+ERROR 2019-02-01 00:55:47,762 81667ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 6, AuctionCurrentPrice: 200.00, UserBidedID: 1
+ERROR 2019-02-01 00:56:11,598 105503ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 6, AuctionCurrentPrice: 200.00, UserBidedID: 2
+INFO  2019-02-01 18:54:14,736 32950ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-01 19:00:12,174 33135ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-01 19:06:38,809 18911ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-01 22:30:52,722 28816ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-01 22:30:57,804 33898ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-01 22:32:24,693 120787ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-01 22:35:09,985 40929ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-02 00:30:37,558 52661ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-02 00:36:42,578 21723ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-02 00:57:12,945 129805ms ccountControllerLogger Login              - usao sam u login
+ERROR 2019-02-02 00:57:39,602 156462ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 1, AuctionName: Pegla, AuctionStatus: READY
+ERROR 2019-02-02 00:57:54,214 171074ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 2, AuctionName: Televizor, AuctionStatus: READY
+ERROR 2019-02-02 00:58:18,129 194989ms AdminController        AddAuction         - CREATE AUCTION: AuctionID: 3, AuctionName: Kompjuter, AuctionStatus: READY
+ERROR 2019-02-02 00:58:26,177 203037ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 2, AuctionStatus: OPEN
+INFO  2019-02-02 00:58:33,226 210086ms ccountControllerLogger Login              - usao sam u login
+ERROR 2019-02-02 00:58:36,550 213410ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 2, AuctionCurrentPrice: 15.00, UserBidedID: 3
+ERROR 2019-02-02 00:58:39,813 216673ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 2, AuctionCurrentPrice: 15.00, UserBidedID: 3
+ERROR 2019-02-02 00:59:32,964 269824ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 2, AuctionCurrentPrice: 15.00, UserBidedID: 3
+INFO  2019-02-02 01:05:28,575 73680ms ccountControllerLogger Login              - usao sam u login
+INFO  2019-02-02 01:05:40,088 85193ms ccountControllerLogger Login              - usao sam u login
+ERROR 2019-02-02 01:05:48,292 93397ms HelpMethods            OpenAuction        - AUCTION OPEN: AuctionID: 1, AuctionStatus: OPEN
+INFO  2019-02-02 01:05:55,469 100574ms ccountControllerLogger Login              - usao sam u login
+ERROR 2019-02-02 01:05:59,989 105094ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 11, UserBidedID: 3
+ERROR 2019-02-02 01:06:06,410 111515ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 12, UserBidedID: 3
+ERROR 2019-02-02 01:06:08,318 113423ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 13, UserBidedID: 3
+ERROR 2019-02-02 01:06:47,622 152727ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 14, UserBidedID: 3
+ERROR 2019-02-02 01:07:02,452 167556ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 15, UserBidedID: 3
+ERROR 2019-02-02 01:07:03,526 168631ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 16, UserBidedID: 3
+ERROR 2019-02-02 01:07:04,477 169581ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 17, UserBidedID: 3
+ERROR 2019-02-02 01:07:05,135 170240ms HelpMethods            BidAuction         - AUCTION BIDED: AuctionID: 1, AuctionCurrentPrice: 18, UserBidedID: 3
+INFO  2019-02-02 01:32:49,929 47933ms ccountControllerLogger Login              - usao sam u login

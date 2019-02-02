@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="webaukcije" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\Faks\\6\.\ Semestar\\IEP\\Projekat\\Aplikacija\\Veb\ portal\ za\ aukcijsku\ prodaju\\Veb\ portal\ za\ aukcijsku\ prodaju\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\Faks\\6\.\ Semestar\\IEP\\Projekat\\Aplikacija\\Veb\ portal\ za\ aukcijsku\ prodaju\\Veb\ portal\ za\ aukcijsku\ prodaju\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="AukcijaEntities-Web.config Connection String" description="" value="metadata=res://*/Models.WebPortalDBModel.csdl|res://*/Models.WebPortalDBModel.ssdl|res://*/Models.WebPortalDBModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=dm130240d.database.windows.net;Initial Catalog=Aukcija;Persist Security Info=True;User ID=dm130240d;Password=MadafakA1994;MultipleActiveResultSets=True;Application Name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Faks\\6\.\ Semestar\\IEP\\Projekat\\Aplikacija\\Veb\ portal\ za\ aukcijsku\ prodaju\\Veb\ portal\ za\ aukcijsku\ prodaju\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AukcijaEntities']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=dm130240d.database.windows.net;Initial Catalog=Aukcija;Persist Security Info=True;User ID=dm130240d;Password=MadafakA1994;MultipleActiveResultSets=True;Application Name=EntityFramework" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Faks\\6\.\ Semestar\\IEP\\Projekat\\Aplikacija\\Veb\ portal\ za\ aukcijsku\ prodaju\\Veb\ portal\ za\ aukcijsku\ prodaju\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>
